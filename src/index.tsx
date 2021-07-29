@@ -1,17 +1,24 @@
 import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { createGlobalStyle } from 'styled-components';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+const GlobalStyles = createGlobalStyle`
+  body {
+    margin: 0;
+  }
+`;
+
+// Create a client
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <GlobalStyles />
+      <App />
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

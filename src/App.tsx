@@ -1,31 +1,41 @@
-import React from 'react';
+import React from "react";
 // Styles
-import { Wrapper, LoadingView } from './App.styles';
-import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
-import { containerStyle, center, options } from './settings'
+import { Wrapper, LoadingView } from "./App.styles";
+import {
+  GoogleMap,
+  Marker,
+  InfoWindow,
+  useJsApiLoader,
+} from "@react-google-maps/api";
+import { containerStyle, center, options } from "./settings";
 
 const App: React.FC = () => {
-const { isLoaded } = useJsApiLoader({
-  id: 'google-map-script',
-  googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY!
-});
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY!,
+  });
 
-//useRef to access the map:
-// const mapRef = React.useRef<google.maps.Map<Element> | null>(null);
-// const mapRef = React.useRef<google.maps.Map>();
-const mapRef = React.useRef<google.maps.Map<Element> | null>(null);
+  const mapRef = React.useRef<google.maps.Map<Element> | null>(null);
 
   const onLoad = (map: google.maps.Map<Element>): void => {
     mapRef.current = map;
   };
 
-  const onUnMount = (): void => {
+  const onUnmount = (): void => {
     mapRef.current = null;
   };
 
+  if (!isLoaded) return <div>Map is loading</div>;
   return (
     <Wrapper>
-   <GoogleMap mapContainerStyle={containerStyle} />
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        options={options as google.maps.MapOptions}
+        center={center}
+        zoom={12}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      />
     </Wrapper>
   );
 };

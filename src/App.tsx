@@ -1,7 +1,8 @@
 import React from 'react';
 // Styles
-import { Wrapper } from './App.styles';
+import { Wrapper, LoadingView } from './App.styles';
 import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
+import { containerStyle, center, options } from './settings'
 
 const App: React.FC = () => {
 const { isLoaded } = useJsApiLoader({
@@ -24,7 +25,7 @@ const mapRef = React.useRef<google.maps.Map<Element> | null>(null);
 
   return (
     <Wrapper>
-   <GoogleMap />
+   <GoogleMap mapContainerStyle={containerStyle} />
     </Wrapper>
   );
 };

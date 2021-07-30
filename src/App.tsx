@@ -11,12 +11,20 @@ const { isLoaded } = useJsApiLoader({
 
 //useRef to access the map:
 // const mapRef = React.useRef<google.maps.Map<Element> | null>(null);
-const mapRef = React.useRef<google.maps.Map>();
+// const mapRef = React.useRef<google.maps.Map>();
+const mapRef = React.useRef<google.maps.Map<Element> | null>(null);
 
+  const onLoad = (map: google.maps.Map<Element>): void => {
+    mapRef.current = map;
+  };
+
+  const onUnMount = (): void => {
+    mapRef.current = null;
+  };
 
   return (
     <Wrapper>
-      <p>Start here!</p>
+   <GoogleMap />
     </Wrapper>
   );
 };

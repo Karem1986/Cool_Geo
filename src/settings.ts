@@ -6,10 +6,10 @@ export const containerStyle = {
   height: "100vh",
 };
 
-// Center on Kalmar
+// Center on Netherlands
 export const center = {
-  lat: 56.68,
-  lng: 16.33,
+  lat: 52.370216,
+  lng: 4.895168,
 };
 
 // Disable default UI

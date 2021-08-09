@@ -1,4 +1,6 @@
 import React from "react";
+//API calls
+import { fetchNearbyPlaces } from "./Api";
 // Styles
 import { Wrapper, LoadingView } from "./App.styles";
 import {
@@ -7,7 +9,16 @@ import {
   InfoWindow,
   useJsApiLoader,
 } from "@react-google-maps/api";
+import { useQuery } from "react-query"; //to fetch the data from the api
 import { containerStyle, center, options } from "./settings";
+
+export type MarkerType = {
+  id: string;
+  location: google.maps.LatLngLiteral;
+  name: string;
+  website: string;
+  phone_number: string;
+};
 
 const App: React.FC = () => {
   const { isLoaded } = useJsApiLoader({
